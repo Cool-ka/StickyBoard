@@ -52,7 +52,6 @@ export default Vue.extend({
   data: () => ({
     color: "#FFF",
     text: "",
-    // showPicker: false
   }),
   methods: {
     prepareSticky() {
@@ -73,7 +72,6 @@ export default Vue.extend({
         left: 200,
         zIndex: this.zIndex,
         editMode: false,
-        index: this.zIndex - 1,
       };
       this.text = "";
       this.$store.commit("addSticky", sticky);

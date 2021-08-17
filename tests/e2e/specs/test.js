@@ -1,6 +1,6 @@
 // https://docs.cypress.io/api/introduction/api.html
 
-describe('My First Test', () => {
+describe('checks if app compiles and has initial button', () => {
   it('Visits the app root url and checks if the button exists', () => {
     cy.visit('/')
     cy.contains('[data-cy=prepareButton]', 'Add Sticky')

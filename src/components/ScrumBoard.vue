@@ -32,16 +32,11 @@ import Sticky from "./Sticky.vue";
 export default Vue.extend({
   name: "ScrumBoard",
   components: { AddSticky, Sticky },
-  data: () => {
-    return {
-      editingMode: false,
-    };
-  },
+
   methods: {
     finishEdit(e) {
       if (e.target.className === "cardText") return;
       if (e.target.className !== "mb-2 card" && e.target.nodeName !== "INPUT") {
-        this.editingMode = false;
         this.$store.commit("toggleEditStickyMode");
       }
     },
@@ -71,12 +66,10 @@ export default Vue.extend({
         left: data.left + "px",
         "z-index": data.zIndex,
         "background-color": data.color,
-        "font-family": "sans-serif",
       };
     },
   },
   computed: mapState({
-    // eslint-disable-next-line
     getStickies: (state) => {
       return state.stickies;
     },
@@ -93,15 +86,7 @@ export default Vue.extend({
   position: absolute;
   padding: 15px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  font-family: Arial, Helvetica, sans-serif,
 }
 
-.board {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 800px;
-  height: 800px;
-  border: 1px solid red;
-  z-index: -1;
-}
 </style>

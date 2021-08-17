@@ -41,7 +41,6 @@ export default Vue.extend({
     },
     editSticky(index) {
       this.$store.commit("toggleEditStickyMode", index);
-      this.editingMode = true;
     },
   },
 });

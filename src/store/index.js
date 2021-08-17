@@ -24,7 +24,7 @@ export default new Vuex.Store({
       if (index !== undefined) {
         state.stickies[index].editMode = true;
       } else {
-        state.stickies.map((sticky) => (sticky.editMode = false));
+        state.stickies.map((sticky) => sticky.editMode = false);
         localStorage.setItem("stickies", JSON.stringify(state.stickies));
       }
     },
