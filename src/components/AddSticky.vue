@@ -2,7 +2,7 @@
   <div>
     <v-app>
       <v-btn
-      data-cy="prepareButton"
+        data-cy="prepareButton"
         outlined
         v-if="!showPicker"
         color="primary"
@@ -10,7 +10,7 @@
         >Add Sticky</v-btn
       >
       <v-color-picker
-      data-cy="colorPicker"
+        data-cy="colorPicker"
         v-if="showPicker"
         mode="hexa"
         v-model="color"
@@ -22,12 +22,17 @@
         show-swatches
       ></v-color-picker>
       <v-text-field
-      data-cy="textField"
+        data-cy="textField"
         label="text for sticky"
         v-if="showPicker"
         v-model="text"
       ></v-text-field>
-      <v-btn data-cy="addSticky" outlined v-if="showPicker" color="primary" @click="addSticky()"
+      <v-btn
+        data-cy="addSticky"
+        outlined
+        v-if="showPicker"
+        color="primary"
+        @click="addSticky()"
         >Add</v-btn
       >
     </v-app>
@@ -37,6 +42,7 @@
 <script lang="ts">
 import Vue from "vue";
 import { mapState } from "vuex";
+const uuidv4 = require("uuid/v4");
 export default Vue.extend({
   name: "AddSticky",
   mounted() {
@@ -57,15 +63,10 @@ export default Vue.extend({
     prepareSticky() {
       this.$store.commit("togglePicker");
     },
-    createId() {
-      return "00000000-0000-4000-8000-000000000000".replace(/0/g, function() {
-        return (0 | (Math.random() * 16)).toString(16);
-      });
-    },
     addSticky() {
       this.$store.commit("increaseZIndex");
       const sticky = {
-        id: this.createId(),
+        id: uuidv4(),
         color: this.color.hex,
         text: this.text || "Default text for a new sticky",
         top: 0,

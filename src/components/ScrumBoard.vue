@@ -1,6 +1,11 @@
 <template>
   <div @click="finishEdit">
-    <div @drop="dropLink" @dragenter="checkDrop" @dragover="checkDrop" data-cy='droppableBoard'>
+    <div
+      @drop="dropLink"
+      @dragenter="checkDrop"
+      @dragover="checkDrop"
+      data-cy="droppableBoard"
+    >
       <div
         draggable="true"
         @dragstart="startDrag($event, index)"
@@ -86,7 +91,7 @@ export default Vue.extend({
   position: absolute;
   padding: 15px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  font-family: Arial, Helvetica, sans-serif,
+  font-family: Arial, Helvetica, sans-serif;
+  word-wrap: break-word;
 }
-
 </style>

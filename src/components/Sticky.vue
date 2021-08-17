@@ -1,8 +1,14 @@
 <template>
-  <div @click="editSticky(index)" data-cy='sticky'>
-    <span data-cy='remove' class="cardText" v-if="editMode" @click="removeSticky(index)">X</span>
+  <div @click="editSticky(index)" data-cy="sticky">
+    <span
+      data-cy="remove"
+      class="cardText"
+      v-if="editMode"
+      @click="removeSticky(index)"
+      >X</span
+    >
     <v-text-field
-    data-cy='inputText'
+      data-cy="inputText"
       class="cardText"
       v-if="editMode"
       v-model="mutableText"
@@ -24,11 +30,11 @@ export default Vue.extend({
 
   computed: {
     mutableText: {
-      get: function() {
+      get: function () {
         return this.text;
       },
 
-      set: function(value) {
+      set: function (value) {
         const index = this.index;
         this.$store.commit("updateText", { index, value });
       },
