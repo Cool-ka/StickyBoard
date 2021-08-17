@@ -37,6 +37,11 @@ npm run build
 ```
 npm run test:e2e
 ```
+to see the coverage, after running the test run
+
+```
+npx nyc report --reporter=text-summary
+```
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
