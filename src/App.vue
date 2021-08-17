@@ -1,28 +1,39 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <scrum-board></scrum-board>
   </div>
 </template>
 
-<script>
-import HelloWorld from './components/HelloWorld.vue'
+<script lang="ts">
+import Vue from "vue";
+import ScrumBoard from "./components/ScrumBoard.vue";
 
-export default {
-  name: 'App',
+export default Vue.extend({
+  name: "App",
+
   components: {
-    HelloWorld
-  }
-}
+    ScrumBoard,
+  },
+
+  data: () => ({}),
+  mounted() {
+    if (localStorage.getItem("stickies")) {
+      try {
+        this.$store.commit("initializeStickies");
+      } catch (e) {
+        localStorage.removeItem("stickies");
+      }
+    }
+  },
+});
 </script>
 
 <style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+.v-application--wrap {
+  max-width: 10%;
+  padding-right: 15px;
+  padding-left: 15px;
+  border-right: 1px solid lightgrey;
+  justify-content: center;
 }
 </style>

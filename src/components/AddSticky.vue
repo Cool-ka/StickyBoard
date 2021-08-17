@@ -1,0 +1,95 @@
+<template>
+  <div>
+    <v-app>
+      <v-btn
+      data-cy="prepareButton"
+        outlined
+        v-if="!showPicker"
+        color="primary"
+        @click="prepareSticky()"
+        >Add Sticky</v-btn
+      >
+      <v-color-picker
+      data-cy="colorPicker"
+        v-if="showPicker"
+        mode="hexa"
+        v-model="color"
+        class="ma-2"
+        hide-sliders
+        hide-canvas
+        hide-mode-switch
+        hide-inputs
+        show-swatches
+      ></v-color-picker>
+      <v-text-field
+      data-cy="textField"
+        label="text for sticky"
+        v-if="showPicker"
+        v-model="text"
+      ></v-text-field>
+      <v-btn data-cy="addSticky" outlined v-if="showPicker" color="primary" @click="addSticky()"
+        >Add</v-btn
+      >
+    </v-app>
+  </div>
+</template>
+
+<script lang="ts">
+import Vue from "vue";
+import { mapState } from "vuex";
+export default Vue.extend({
+  name: "AddSticky",
+  mounted() {
+    this.color = {
+      get() {
+        return this.color;
+      },
+      set(v) {
+        this.color = v;
+      },
+    };
+  },
+  data: () => ({
+    color: "#FFF",
+    text: "",
+    // showPicker: false
+  }),
+  methods: {
+    prepareSticky() {
+      this.$store.commit("togglePicker");
+    },
+    createId() {
+      return "00000000-0000-4000-8000-000000000000".replace(/0/g, function() {
+        return (0 | (Math.random() * 16)).toString(16);
+      });
+    },
+    addSticky() {
+      this.$store.commit("increaseZIndex");
+      const sticky = {
+        id: this.createId(),
+        color: this.color.hex,
+        text: this.text || "Default text for a new sticky",
+        top: 0,
+        left: 200,
+        zIndex: this.zIndex,
+        editMode: false,
+        index: this.zIndex - 1,
+      };
+      this.text = "";
+      this.$store.commit("addSticky", sticky);
+      this.$store.commit("togglePicker");
+    },
+  },
+  computed: mapState({
+    showPicker: (state) => state.showPicker,
+    zIndex: (state) => state.zIndex,
+  }),
+});
+</script>
+
+<!-- Add "scoped" attribute to limit CSS to this component only -->
+<style scoped lang="scss">
+.v-input {
+  max-height: 100px;
+}
+</style>
