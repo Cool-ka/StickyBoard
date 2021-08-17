@@ -35,11 +35,6 @@ npm run build
 
 ### Run your end-to-end tests
 ```
-npm run serve
-```
-
-following with
-```
 npm run test:e2e
 ```
 
